@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>324 Project</title>
+<link href="https://fonts.googleapis.com/css?family=Arimo|Lato|Roboto+Slab" rel="stylesheet">
+<style>
+header, footer {
+    color: white;
+    background-color: black;
+    padding: 10px 50px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Arimo', sans-serif;
+}
+
+article {
+    overflow: hidden;
+    padding: 20px 50px;
+}
+
+legend{
+    font-size: 25px;
+    font-family: 'Roboto Slab', serif;
+}
+
+input,label, button{
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: black;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container">
+
+<header>
+   <h1>324 Project &#x2764;</h1>
+</header>
+
+<article>
+
+<form>
+  <fieldset>
+    <legend>Chose an activity</legend>
+    <div>
+      <input type="radio" id="activityChoice1"
+       name="activity" value="food" checked>
+      <label for="contactChoice1">Food</label>
+
+      <input type="radio" id="activityChoice2"
+       name="activity" value="drinks">
+      <label for="contactChoice2">Drinks</label>
+
+      <input type="radio" id="activityChoice3"
+       name="activity" value="entertainment">
+      <label for="contactChoice3">Entertainment</label>
+    </div>
+  </fieldset>
+</form>
+
+<br>
+
+<form>
+  <fieldset>
+    <legend>Chose a date</legend>
+    <div>
+      <input type="date" name="setday">
+    </div>
+  </fieldset>
+</form>
+
+<br>
+
+<form>
+  <fieldset>
+    <legend>Are you a Loyola student?</legend>
+    <div>
+      <input type="radio" id="studentChoice1"
+       name="student" value="yes" checked>
+      <label for="studentChoice1">Yes</label>
+
+      <input type="radio" id="studentChoice2"
+       name="student" value="no">
+      <label for="studentChoice2">No</label>
+    </div>
+  </fieldset>
+</form>
+
+<br>
+
+<form>
+  <fieldset>
+    <legend>Are you over the age of 21?</legend>
+    <div>
+      <input type="radio" id="ageChoice1"
+       name="age" value="yes" checked>
+      <label for="ageChoice1">Yes</label>
+
+      <input type="radio" id="ageChoice2"
+       name="age" value="no">
+      <label for="ageChoice2">No</label>
+    </div>
+  </fieldset>
+</form>
+
+<br>
+
+<button type="submit">Submit</button>
+
+</article>
+
+<footer style="font-size: 12px">sample footer</footer>
+</div>
+</body>
+</html>
