@@ -120,7 +120,7 @@ nav a:hover {
 
 <form>
   <fieldset>
-    <legend>Chose one or more activities</legend>
+    <legend>Choose one or more activities</legend>
     <div>
       <input type="checkbox" id="activityChoice1" name="food" value="food">
         <label for="activityChoice1">Food</label>
