@@ -1,0 +1,93 @@
+/* Welcome to our CSS*/
+
+main {
+    min-width: 620px;
+    overflow: hidden;
+}
+
+header,footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+footer {
+    font-family: 'Arimo', sans-serif;
+    font-size: 12px;
+    padding: 7px;
+}
+
+nav {
+    font-family: 'Arimo', sans-serif;
+    font-size: 17px;
+    margin: 0px;
+}
+
+nav ul {
+    background-color: black;
+    list-style-type: none;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+nav li {
+    float: left;
+    padding: 15px 5px;
+    margin: 0px;
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 120px;
+    margin: 0px;
+    padding: 15px;
+}
+
+nav li a {
+    color: white;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+input, button, fieldset {
+    font-family: 'Arimo', sans-serif;
+    font-size: 20px;
+}
+
+fieldset {
+    border: 1px solid black;
+    margin-bottom: 15px;
+    margin-left: 15%;
+    margin-right: 5%;
+}
+
+legend {
+    font-size: 25px;
+    padding: 5px;
+}
+
+input[type='radio']:after, input[type='radio']:checked:after, [type='checkbox']:after, input[type='checkbox']:checked:after {
+    background-color: lightgrey;
+    border: 2px solid white;
+    content: ''; /*this adds the custom styling*/
+    display: inline-block;
+    height: 15px;
+    left: -1px;
+    position: relative;
+    top: -2px;
+    visibility: visible;
+    width: 15px;
+}
+
+input[type='radio']:checked:after, input[type='checkbox']:checked:after {background-color: black;}
+
+button {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    padding: 8px;
+    width: 200px;
+    margin-left: 15%;
+    margin-bottom: 10px;
+}
