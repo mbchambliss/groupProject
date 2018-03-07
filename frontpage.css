@@ -91,3 +91,32 @@ button {
     margin-left: 15%;
     margin-bottom: 10px;
 }
+
+#resetButton {
+    //display: none;
+}
+
+#results {
+    font-family: 'Arimo', sans-serif;
+    font-size: 20px;
+    border: black;
+    margin: 0 20px 0 20px;
+    text-align: center;
+    background-color: yellow;
+}
+
+#show-popular {
+    display: none;
+}
+
+#show-week {
+    display: none;
+}
+
+#show-best {
+    display: none;
+}
+
+#show-staff {
+    display: none;
+}
