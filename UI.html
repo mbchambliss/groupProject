@@ -32,6 +32,15 @@ input, button, footer, nav, fieldset{
     font-size: 20px;
 }
 
+#results {
+    font-family: 'Arimo', sans-serif;
+    font-size: 20px;
+    border: black;
+    margin: 0 20px 0 20px;
+    text-align: center;
+    background-color: yellow;
+}
+
 footer{font-size: 12px;}
 legend{font-size: 25px;}
 fieldset{border: 1px solid black;}
@@ -42,6 +51,10 @@ button{
   background-color: black;
   padding: 8px;
   width: 200px;
+}
+
+#resetButton {
+    //display: none;
 }
 
 article {
@@ -97,6 +110,22 @@ nav a:hover {
     color: white;
 }
 
+#show-popular {
+    display: none;
+}
+
+#show-week {
+    display: none;
+}
+
+#show-best {
+    display: none;
+}
+
+#show-staff {
+    display: none;
+}
+
 </style>
 </head>
 <body>
@@ -109,10 +138,14 @@ nav a:hover {
 
 <nav>
   <ul>
-    <li><a href="#">This Week</a></li>
-    <li><a href="#">Most Popular</a></li>
-    <li><a href="#">Best Deals</a></li>
-    <li><a href="#">Staff Picks</a></li>
+    <li id="week"><a href="#">This Week</a></li>
+        <p id="show-week">INFORMATION HAPPENING THIS WEEK WILL BE HERE!</p>
+    <li id="popular"><a href="#">Most Popular</a></li>
+        <p id="show-popular">INFORMATION FOR MOST POPULAR WILL BE HERE!</p>
+    <li id="best"><a href="#">Best Deals</a></li>
+        <p id="show-best">INFORMATION FOR THE BEST DEALS WILL BE HERE!</p>
+    <li id="staff"><a href="#">Staff Picks</a></li>
+        <p id="show-staff">INFORMATION FOR STAFF PICKS WILL BE HERE!</p>
   </ul>
 </nav>
 
@@ -120,7 +153,7 @@ nav a:hover {
 
 <form>
   <fieldset>
-    <legend>Chose one or more activity</legend>
+    <legend>Choose one or more activity</legend>
     <div>
       <input type="checkbox" id="activityChoice1" name="food" value="food">
         <label for="activityChoice1">Food</label>
@@ -135,9 +168,9 @@ nav a:hover {
 
 <form>
   <fieldset>
-    <legend>Chose a date</legend>
+    <legend>Choose a date</legend>
     <div>
-      <input type="date" name="event" min="2018-01-01" required>
+      <input type="date" id = " date " name="event" min="2018-01-01" required>
     </div>
   </fieldset>
 </form>
@@ -174,11 +207,18 @@ nav a:hover {
 
 <br>
 
-<button type="submit">Submit</button>
+<button type="submit" id="submitButton">Submit</button>
+<button type="reset" id="resetButton">Reset</button>
 
 </article>
 
+<p id="results">
+</p>
+
 <footer>created by Grace, Blake, Redick and Keyti &#x2764;</footer>
 </div>
+<script src="projectJS.js"></script>
+<script src="jquery.js"></script>
+<script>
 </body>
 </html>
