@@ -34,6 +34,13 @@ nav li {
     float: left;
     padding: 15px 5px;
     margin: 0px;
+    width: 24%;
+    text-align: center;
+}
+
+li p {
+    margin-left: 10%;
+    text-align: center;
 }
 
 h3 {
@@ -99,8 +106,7 @@ button {
 #results {
     font-family: 'Arimo', sans-serif;
     font-size: 20px;
-    border: black;
-    margin: 0 20px 0 20px;
+    margin: 0 20px 5px 20px;
     text-align: center;
     background-color: yellow;
 }
