@@ -1,0 +1,19 @@
+Restaurant Name			Address				Website				Monday Specials		
+------------------------	------------------------	------------------------	------------------------	
+Flaco’s Tacos			1116 20 West Granville		http://flacostacosonline.com/	$3 Margaritas
+				Avenue Chicago, IL 60660					$5 Burritos
+		
+Veranda Restaurant & Coffee	1100 W Thorndale Ave		http://verandagruppo.com/	$4 off Specialty Pizza
+				Chicago, IL 60660						$2 off Draft Beer
+
+
+Event				Time				Venue
+------------------------	------------------------	------------------------
+Men’s Volleyball vs Ball State	7:00 pm				Gentile Arena
+
+In/Motion Dance Film Festival	7:30 pm				Newhart Family Theatre
+Dance Composition Performance 
+2018
+
+Loyola Fine Arts Senior		6:00 pm				Gallery 205
+Exhibition Opening
