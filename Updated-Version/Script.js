@@ -50,6 +50,10 @@ $( "#theForm" ).submit(function( event ) {
         $("li").addClass("newLi");
 });
 
+$.getJSON("localhost:2018.json", function (response) {
+    console.log("response = " +response.toSource());
+});
+
 $("p#results").hide();
 $("#submitButton").click(function() {
     $( "#theForm" ).submit();
