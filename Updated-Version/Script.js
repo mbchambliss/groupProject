@@ -50,9 +50,18 @@ $( "#theForm" ).submit(function( event ) {
         $("li").addClass("newLi");
 });
 
-$.getJSON("localhost:2018.json", function (response) {
-    console.log("response = " +response.toSource());
-});
+    var xobj = new XMLHttpRequest();
+    xobj.open('GET', "http://localhost:2018");
+    xobj.onload = function(data) {
+    };
+    xobj.send();
+
+$.getJSON("http://localhost:2018", function(data){
+    for(var i=0;i<data.length; i++){
+        //below just for testing - Works!
+        console.log(data[i].name + ": price level: " +data[i].price);
+    }
+    });
 
 $("p#results").hide();
 $("#submitButton").click(function() {
@@ -90,7 +99,6 @@ function checkAge() {
         $('ul#result').append("<li>" + ofAge + "</li>");
     }
 };
-
 
 function checkFood(){
     var Foodrecommend1 = "Flaco's Tacos is what we recommend, here is the address: 1116-20 West Granville, check their website for details. ";
