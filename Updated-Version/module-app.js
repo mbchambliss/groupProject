@@ -1,5 +1,5 @@
 var http = require('http'),
-    express = require("express"),
+    express = require('express'),
     testApp = express(),
     searchResults = [];
 
@@ -11,22 +11,17 @@ var http = require('http'),
 //Search for food
   const searchRequest = {
     term:'food',
-    location: 'Rogers Park, Chicago, IL',
+    location: 'Rogers Park, Edgewater, Chicago, IL',
     price: '1'
   };
 
 //Search for bars
   const searchRequest2 = {
       term: 'bars',
-      location: 'Rogers Park, Chicago, IL',
+      location: 'Rogers Park, Edgewater, Chicago, IL',
       price: '1'
   };
 
-//Search for events - haven't decided how to use yet
-  const searchRequest3 = {
-      cost_max: '150.00',
-      location: 'Northside, Chicago, IL'
-  }
 //creates local server
 http.createServer(testApp).listen(2018);
 
@@ -48,6 +43,13 @@ testApp.get("", function(req, res){
       console.log(e);
     });
 });
+
+
+
+
+
+
+
 
 //trying to get it to work with events - don't use yet
 // testApp.get("", function(req, res){
