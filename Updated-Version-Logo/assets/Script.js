@@ -111,18 +111,68 @@ function jsonData() { $.getJSON("http://localhost:2018").then(response => {
         });
     }
 
-	mostPopularContent = "";
+	mostPopularContent = document.getElementById("mostPopular").innerHTML;
+	pricesContent = document.getElementById("categories").innerHTML;
+	closestContent = document.getElementById("closest").innerHTML;
 	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
-            var businessData = response;
+
+            var lookup = {};
+            var items = response;
+            var result = [];
+            
+            for (var item, i = 0; item = items[i++];) {
+              var id = item.id;
+            
+              if (!(id in lookup)) {
+                lookup[id] = 1;
+                result.push(item);
+              }
+            }
+
+            var businessData = result;
+            var distancesArray = businessData.map(a => a.distance);
+            Array.min = function( array ){
+                return Math.min.apply( Math, array );
+            };
+
+            var closestDistance = Array.min(distancesArray);
 				for (i in businessData) {
-				  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
-				  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
-				  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
-				  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
-				}
-			document.getElementById("mostPopular").innerHTML = mostPopularContent;
-        }).catch((err) => {			
+                    if(businessData[i].rating >= 4.5) {
+                        mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+                        mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+                        mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+                        mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
+                    }
+
+                    if(businessData[i].price.length == 1) {
+                        pricesContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
+                        pricesContent  +=   businessData[i].name + "<br>";
+                        pricesContent  +=  "<img class='zoom' src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
+                        "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
+                        "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
+                        pricesContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
+                    }
+                    
+                    if(businessData[i].distance == closestDistance){
+                        closestContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
+                        closestContent  +=   businessData[i].name + "<br>";
+                        closestContent  +=   "Phone: " + businessData[i].phone + "<br>";
+                        closestContent  +=  "<img src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
+                        "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
+                        "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
+                        closestContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
+                    }
+                    
+
+
+                }
+                document.getElementById("mostPopular").innerHTML = mostPopularContent;
+                document.getElementById("categories").innerHTML = pricesContent;
+                document.getElementById("closest").innerHTML = closestContent;
+            }).catch((err) => {			
 				document.getElementById("mostPopular").innerHTML = "Data not available.";
+				document.getElementById("categories").innerHTML = "Data not available.";
+				document.getElementById("closest").innerHTML = "Data not available.";
 				console.log('error found = ', err);
         });
     }
