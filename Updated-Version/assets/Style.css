@@ -1,17 +1,22 @@
-* {box-sizing: border-box}
-
-/* Set height of body and the document to 100% */
-body, html {
-    height: 100%;
-    margin: 0;
+* {
+    box-sizing: border-box
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 li {
     padding-top: 2%;
+}
+
+.newLi {
+    background-color: darkred;
+    color: gold;
+    font-family: 'Open Sans', sans-serif;
+    margin: 80px auto ;
+    width: 90%;
+    text-align: center;
 }
 
 img {
@@ -21,40 +26,20 @@ img {
     max-height: 150px;
 }
 
-.newLi {
-    background-color: darkred;
-    font-family: 'Open Sans', sans-serif;
-    color: gold;
-}
-
 /* Style tab links */
 .tablink {
-    font-family: 'Open Sans', sans-serif;
     background-color: darkred;
-    color: gold;
-    float: left;
     border-left: 2px solid gold;
     border-right: 2px solid gold;
     border-top: 4px solid gold;
-    outline: none;
     cursor: pointer;
-    padding: 15px;
-    font-size: 27px;
-    width: 50%;
-}
-
-.restaurantTabs {
-    font-family: 'Open Sans', sans-serif;
+    color: gold;
     float: left;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 27px;
     outline: none;
     padding: 15px;
-    font-size: 15px;
-    width: 14%;
-}
-
-.suggestionsTabsHeaders{
-    font-size: 22px;
-    font-weight: bold;
+    width: 50%;
 }
 
 /* Style the tab content (and add height:100% for full page content) */
@@ -62,40 +47,35 @@ img {
     color: black;
     display: none;
     padding: 90px 20px;
-    height: 100%;
-}
-
-main {
-    overflow: hidden;
 }
 
 header {
     background-color: black;
+    padding: 15px;
 }
 
 footer {
-    font-family: 'Arimo', sans-serif;
-    font-size: 12px;
-    text-align: center;
     background-color: black;
     color: white;
+    font-family: 'Arimo', sans-serif;
+    font-size: 12px;
     padding: 10px;
+    text-align: center;
 }
 
 h3 {
+    color: white;
     font-family: 'Open Sans', sans-serif;
     font-size: 120px;
     margin: 0px;
-    text-align: center;
-    color: white;
     padding-bottom: 20px;
+    text-align: center;
 }
 
 h4 {
     font-family: 'Open Sans', sans-serif;
     color: black;
 }
-
 
 input, p {
     font-family: 'Arimo', sans-serif;
@@ -106,9 +86,9 @@ fieldset {
     border: 2px solid black;
     font-size: 25px;
     font-family: 'Arimo', sans-serif;
-    width: 90%;
-    margin:10px auto;
+    margin: 15px auto;
     text-align: center;
+    width: 90%;
 }
 
 legend {
@@ -133,37 +113,37 @@ input[type='radio']:checked:after, input[type='checkbox']:checked:after {backgro
 
 #submitButton, #resetButton {
     background-color: black;
-    border: 1px solid black;
     color: white;
-    width: 200px;
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    height: 50px;
+    font-size: 15px;
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
-    display:block;
     float: right;
-    padding: 5px 10px;
-    margin: 15px auto auto 10px;
 }
 
-#submitButton{margin-right: 5%;}
-
 .accordion {
-    font-family: 'Open Sans', sans-serif;
     background-color: white;
     border: 2px solid black;
     color: black;
     cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+    margin-top: 10px;
     padding: 10px;
     text-align: center;
-    font-size: 22px;
-    width: 100%;
-    margin-top: 10px;
+    display: block;
+    width: 90%;
+    margin: 10px auto;
 }
 
 .panel {
-    display: none;
     background-color: white;
-    overflow: hidden;
-    width: 90%;
+    display: none;
     margin: auto;
+    overflow: hidden;
     text-align: center;
+    width: 80%;
+    margin: auto;
 }

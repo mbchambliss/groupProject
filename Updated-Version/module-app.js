@@ -4,13 +4,15 @@ var http = require('http'),
     searchResults = [];
 
   const yelp = require('yelp-fusion');
-  // Individualized API key
   const apiKey = "KAhRkGDUNpqGvR-P94ii7uH2K60Rt6GDk1msY6Yh_6DZNKxb0Q9aNNYoi-q0mos9zew6AZtMGIm6MrQFldYZ__TfeRqhJyHInCGuDGpuLIVIB5jQz6BW3gsH68nGWnYx";
   const client = yelp.client(apiKey);
 
+  testApp.use(express.static(__dirname + "/assets"));
+  //creates local server
+  http.createServer(testApp).listen(2018);
 //Search for food
   const searchRequest = {
-    term:'food',
+    term:'restaurants',
     location: 'Rogers Park, Edgewater, Chicago, IL',
     price: '1'
   };
@@ -22,9 +24,8 @@ var http = require('http'),
       price: '1'
   };
 
-//creates local server
-http.createServer(testApp).listen(2018);
 
+http.createServer(testApp).listen(2018);
 testApp.get("", function(req, res){
     client.search(searchRequest).then(response => {
         for (i=0;i<3;i++){
@@ -34,12 +35,13 @@ testApp.get("", function(req, res){
     client.search(searchRequest2).then(response => {
         for (i=0;i<3;i++){
         searchResults.push(response.jsonBody.businesses[i]);
-    }
-}).then(function(){
+        }
+    }).then(function(response) {
         searchResults.forEach(function(element){
-            return res.json(searchResults);
-        })
-    }).catch(e => {
+        return res.json(searchResults)
+        //console.log(searchResults);
+    })
+}).catch(e => {
       console.log(e);
     });
 });
