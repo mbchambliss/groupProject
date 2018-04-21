@@ -111,15 +111,17 @@ function jsonData() { $.getJSON("http://localhost:2018").then(response => {
             console.log('error found = ', err);
         });
     }
-	mostPopularContent = "";
+	mostPopularContent = document.getElementById("mostPopular").innerHTML;
 	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
             var businessData = response;
 				for (i in businessData) {
-				  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
-				  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
-				  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
-				  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
-				}
+                    if(businessData[i].rating >= 4.5) {
+                        mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+                        mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+                        mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+                        mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
+                    }
+                }
 			document.getElementById("mostPopular").innerHTML = mostPopularContent;
         }).catch((err) => {			
 				document.getElementById("mostPopular").innerHTML = "Data not available.";
