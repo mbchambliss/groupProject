@@ -24,35 +24,29 @@ var http = require('http'),
       price: '1'
   };
 
-testApp.get("", function(req, res){
-    client.search(searchRequest).then(response => {
-        for (i=0;i<3;i++){
-        searchResults.push(response.jsonBody.businesses[i]);
-        }
-    });
-    client.search(searchRequest2).then(response => {
-        for (i=0;i<3;i++){
-        searchResults.push(response.jsonBody.businesses[i]);
-        }
+  testApp.get("", function(req, res){
+      client.search(searchRequest).then(response => {
+          for (i=0;i<3;i++){
+          res.json(response.jsonBody.businesses[i]);
+          }
+      }).then(function() {
+        client.search(searchRequest2).then(response => {
+          for (i=0;i<3;i++){
+              searchResults.push(response.jsonBody.businesses[i]);
+          }
+        })
     }).then(function(response) {
-        searchResults.forEach(function(element){
-        res.json(searchResults)
-        //console.log(searchResults);
-    })
-}).catch(e => {
-      console.log(e);
-    });
-});
+          searchResults.forEach(function(element){
+          res.json(searchResults)
+          //console.log(searchResults);
+            })
+        }).catch(e => {
+            console.log(e);
+      });
+  });
 
-
-
-
-
-
-
-
-//trying to get it to work with events - don't use yet
-// testApp.get("", function(req, res){
+//original - works but not perfectly
+//testApp.get("", function(req, res){
 //     client.search(searchRequest).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
@@ -61,17 +55,13 @@ testApp.get("", function(req, res){
 //     client.search(searchRequest2).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
-//     }
-// });
-//     client.search(searchRequest3).then(response => {
-//         for (i=0;i<3;i++){
-//             searchResults.push(response.jsonBody.businesses[i]);
 //         }
-//     }).then(function(){
+//     }).then(function(response) {
 //         searchResults.forEach(function(element){
-//             return res.json(searchResults);
-//         })
-//     }).catch(e => {
+//         res.json(searchResults)
+//         //console.log(searchResults);
+//     })
+// }).catch(e => {
 //       console.log(e);
 //     });
 // });

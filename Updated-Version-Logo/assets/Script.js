@@ -28,25 +28,24 @@ function openPage(pageName,elmnt) {
 		
 
     }
+
 }
 document.getElementById("defaultOpen").click();
 
 //Reset Button
 $("#resetButton").click(function() {
-    location.reload();
-    // event.preventDefault();
-    // $('p#results').hide();
-    // $('ul#result').hide();
-    // $('li').empty().hide();
-    // $('h4').empty().hide();
-    // $('[type="checkbox"]').each(function() {
-    //     this.checked = false;
-    // });
-    // $('[type="date"]').val('');
-    // $('[type="radio"]').each(function() {
-    //     this.checked = false;
-    // });
-    // enableSubmit();
+    //location.reload();
+    event.preventDefault();
+    $('h4').empty();
+    $('ul').empty();
+    $('[type="checkbox"]').each(function() {
+        this.checked = false;
+    });
+    $('[type="date"]').val('');
+    $('[type="radio"]').each(function() {
+        this.checked = false;
+    });
+    enableSubmit();
 });
 
 function enableSubmit() {
@@ -56,7 +55,7 @@ function enableSubmit() {
 //code for after input and submit call
 $("#theForm").submit(function(event) {
     event.preventDefault();
-    $("p#results").show();
+    $("#results").show();
     jsonData();
     disableSubmit();
 });
@@ -87,22 +86,22 @@ function jsonData() { $.getJSON("http://localhost:2018").then(response => {
             if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
                 for(var i=0;i<6; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
                 }
             } else if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food Specials" + "</h4>");
                 for(var i=0;i<3; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
                 }
             } else if (response !== null && $("#activityChoice1").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food Specials" + "</h4>");
                 for(var i=0;i<3; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
+                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
                 }
             } else if (response !== null && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
                 $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
                 for(var i=3;i<6; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
+                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
                 }
             } else {
                 $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
@@ -111,6 +110,7 @@ function jsonData() { $.getJSON("http://localhost:2018").then(response => {
             console.log('error found = ', err);
         });
     }
+
 	mostPopularContent = "";
 	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
             var businessData = response;
@@ -140,7 +140,6 @@ function disableSubmit() {
 function enableSubmit() {
     $("#submitButton").prop("disabled", false);
 };
-
 
 
 
