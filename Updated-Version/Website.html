@@ -68,13 +68,79 @@
 <button class="accordion">This Week</button>
 <div class="panel">
     <!--add entire weekly deals that pulls from JSON data-->
+<p> Here are this week's specials </p>
+<p id="thisWeeksSpecials"></p>
+<script>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+var myObj, i, x ="";
+myObj = {
+    "names": [ "Lighthouse Tavern", "Susie's Noon Hour Grill", "Flaco's Tacos" ],
+    "specials": [ "Crabs: $1 per oz", "All beer on tap: $2", "Special Taco for only $1" ],
+    "addresses": [ "7301 N Sheridan Rd, Chicago, IL 60626", "6930 N Glenwood Ave., Chicago, IL 60626", "46 E Chicago Ave., Chicago, IL 60611" ]
+  };
+
+jsonArray = [
+  {
+    "dayOfWeek": "Sunday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Monday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Tuesday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Wednesday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Thursday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Friday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  },
+  {
+    "dayOfWeek": "Saturday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd"
+  }
+];
+
+for (i in jsonArray) {
+  x  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + jsonArray[i].dayOfWeek + "</div><br>";
+  x  +=  jsonArray[i].nameOfRestaurant + "<br>";
+  x  +=  jsonArray[i].special + "<br>";
+  x  +=  jsonArray[i].address + "<br></div>";
+}
+
+  document.getElementById("thisWeeksSpecials").innerHTML = x;
+
+  </script>
+
 </div>
 
 <button class="accordion">Most Popular</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<div id="mostPopular" class="panel">
+<p> Here are the most popular restaurants (>=4.5 stars)</p>
 </div>
 
 <button class="accordion">Recently Added</button>
