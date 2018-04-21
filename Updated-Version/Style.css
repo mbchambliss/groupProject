@@ -32,6 +32,20 @@ ul {
     width: 50%;
 }
 
+.restaurantTabs {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    outline: none;
+    padding: 15px;
+    font-size: 15px;
+    width: 14%;
+}
+
+.suggestionsTabsHeaders{
+    font-size: 22px;
+    font-weight: bold;
+}
+
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
     color: black;
