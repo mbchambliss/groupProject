@@ -64,14 +64,85 @@
 
 <div id="Suggestions" class="tabcontent">
 
+<!--add "Today's Deal" that pulls from JSON data-->
+
 <button class="accordion">This Week</button>
 <div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <!--add entire weekly deals that pulls from JSON data-->
+<p> Here are this week's specials: </p>
+<p id="thisWeeksSpecials"></p>
+<script>
+
+
+var myObj, i, x ="";
+myObj = {
+    "names": [ "Lighthouse Tavern", "Susie's Noon Hour Grill", "Flaco's Tacos" ],
+    "specials": [ "Crabs: $1 per oz", "All beer on tap: $2", "Special Taco for only $1" ],
+    "addresses": [ "7301 N Sheridan Rd, Chicago, IL 60626", "6930 N Glenwood Ave., Chicago, IL 60626", "46 E Chicago Ave., Chicago, IL 60611" ]
+  };
+
+jsonArray = [
+  {
+    "dayOfWeek": "Monday",
+    "nameOfRestaurant" : "Rogers Park Social",
+    "special" : "$6 Glasses of Wine",
+    "address" : "6920 N Glenwood Ave., Chicago, IL 60626"
+  },
+  {
+    "dayOfWeek": "Tuesday",
+    "nameOfRestaurant" : "R Public House",
+    "special" : "$5 Burger Monday",
+    "address" : "1508 W Jarvis Ave., Chicago, IL 60626"
+  },
+  {
+    "dayOfWeek": "Wednesday",
+    "nameOfRestaurant" : "Pub 626",
+    "special" : "$10 Mussels and $5 Mules",
+    "address" : "1406 W Morse Ave, Chicago, IL 60626"
+  },
+  {
+    "dayOfWeek": "Thursday",
+    "nameOfRestaurant" : "J.B. Albertos's",
+    "special" : "1/2 Chicken Dinner for $8.50",
+    "address" : "1326 West Morse Avenue, Chicago, IL 60626"
+  },
+  {
+    "dayOfWeek": "Friday",
+    "nameOfRestaurant" : "Bulldog Ale House",
+    "special" : "All You Can Eat Fish Fry $10.99",
+    "address" : "6606 N Sheridan Rd, Chicago, IL 60626"
+  },
+  {
+    "dayOfWeek": "Saturday",
+    "nameOfRestaurant" : "Bangers & Lace",
+    "special" : "$3 Hot Dog and Chips",
+    "address" : "810 Grove St, Evanston, IL 60201"
+  },
+  {
+    "dayOfWeek": "Sunday",
+    "nameOfRestaurant" : "Lighthouse Tavern",
+    "special" : "Crabs: $1 per oz",
+    "address" : "7301 N Sheridan Rd, Chicago, IL 60626"
+  }
+];
+
+for (i in jsonArray) {
+  x  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + jsonArray[i].dayOfWeek + "</div><br>";
+  x  +=  jsonArray[i].nameOfRestaurant + "<br>";
+  x  +=  jsonArray[i].special + "<br>";
+  x  +=  jsonArray[i].address + "<br></div>";
+}
+
+  document.getElementById("thisWeeksSpecials").innerHTML = x;
+
+  </script>
+
 </div>
 
 <button class="accordion">Most Popular</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<div id="mostPopular" class="panel">
+<p> Here are the most popular restaurants (>=4.5 stars)</p>
+
 </div>
 
 <button class="accordion">Recently Added</button>

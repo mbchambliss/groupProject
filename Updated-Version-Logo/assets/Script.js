@@ -22,6 +22,13 @@ function openPage(pageName,elmnt) {
         tabcontent[i].style.display = "none";
     }
     document.getElementById(pageName).style.display = "block";
+	
+	if(pageName == 'Suggestions'){
+        jsonDataSuggestions();
+		
+
+    }
+
 }
 document.getElementById("defaultOpen").click();
 
@@ -75,7 +82,6 @@ function getJSON(url){
         });
     }
 
-//var li = $("<li>");
 function jsonData() { $.getJSON("http://localhost:2018").then(response => {
             if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
@@ -105,6 +111,22 @@ function jsonData() { $.getJSON("http://localhost:2018").then(response => {
         });
     }
 
+	mostPopularContent = "";
+	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
+            var businessData = response;
+				for (i in businessData) {
+				  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+				  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+				  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+				  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
+				}
+			document.getElementById("mostPopular").innerHTML = mostPopularContent;
+        }).catch((err) => {			
+				document.getElementById("mostPopular").innerHTML = "Data not available.";
+				console.log('error found = ', err);
+        });
+    }
+
 $("p#results").hide();
 $("#submitButton").click(function() {
     $( "#theForm" ).submit();
@@ -115,6 +137,9 @@ function disableSubmit() {
     $("#submitButton").prop("disabled", true);
 };
 
+function enableSubmit() {
+    $("#submitButton").prop("disabled", false);
+};
 
 
 

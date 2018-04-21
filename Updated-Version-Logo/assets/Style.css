@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box
-}
-
 ul {
     list-style-type: none;
 }
@@ -9,6 +5,15 @@ ul {
 li {
     padding-top: 2%;
 }
+
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
 
 .newLi {
     background-color: darkred;
@@ -24,22 +29,38 @@ img {
     margin: auto;
     max-width: 150px;
     max-height: 150px;
+    font-family: 'Open Sans', sans-serif;
+    color: gold;
 }
 
 /* Style tab links */
 .tablink {
+    font-family: 'Open Sans', sans-serif;
     background-color: darkred;
+    color: gold;
+    float: left;
     border-left: 2px solid gold;
     border-right: 2px solid gold;
     border-top: 4px solid gold;
+    outline: none;
     cursor: pointer;
-    color: gold;
-    float: left;
-    font-family: 'Open Sans', sans-serif;
+    padding: 15px;
     font-size: 27px;
+    width: 50%;
+}
+
+.restaurantTabs {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
     outline: none;
     padding: 15px;
-    width: 50%;
+    font-size: 15px;
+    width: 14%;
+}
+
+.suggestionsTabsHeaders{
+    font-size: 22px;
+    font-weight: bold;
 }
 
 /* Style the tab content (and add height:100% for full page content) */
@@ -47,6 +68,11 @@ img {
     color: black;
     display: none;
     padding: 90px 20px;
+    height: 100%;
+}
+
+main {
+    overflow: hidden;
 }
 
 header {
@@ -124,6 +150,21 @@ input[type='radio']:checked:after, input[type='checkbox']:checked:after {backgro
 }
 
 .accordion {
+    border: 1px solid black;
+    color: white;
+    width: 200px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    display:block;
+    float: right;
+    padding: 5px 10px;
+    margin: 15px auto auto 10px;
+}
+
+#submitButton{margin-right: 5%;}
+
+.accordion {
+    font-family: 'Open Sans', sans-serif;
     background-color: white;
     border: 2px solid black;
     color: black;
@@ -146,4 +187,9 @@ input[type='radio']:checked:after, input[type='checkbox']:checked:after {backgro
     text-align: center;
     width: 80%;
     margin: auto;
+    padding: 10px;
+    text-align: center;
+    font-size: 22px;
+    width: 100%;
+    margin-top: 10px;
 }

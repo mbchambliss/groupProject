@@ -46,16 +46,17 @@ var http = require('http'),
   });
 
 //original - works but not perfectly
-// testApp.get("", function(req, res){
+//testApp.get("", function(req, res){
 //     client.search(searchRequest).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
 //         }
-//     }).then(client.search(searchRequest2).then(response => {
+//     });
+//     client.search(searchRequest2).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
 //         }
-//     })).then(function(response) {
+//     }).then(function(response) {
 //         searchResults.forEach(function(element){
 //         res.json(searchResults)
 //         //console.log(searchResults);
