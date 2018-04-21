@@ -22,23 +22,31 @@ function openPage(pageName,elmnt) {
         tabcontent[i].style.display = "none";
     }
     document.getElementById(pageName).style.display = "block";
+	
+	if(pageName == 'Suggestions'){
+        jsonDataSuggestions();
+		
+
+    }
 }
 document.getElementById("defaultOpen").click();
 
 //Reset Button
 $("#resetButton").click(function() {
-    //location.reload();
-    event.preventDefault();
-    $('h4').empty();
-    $('ul').empty();
-    $('[type="checkbox"]').each(function() {
-        this.checked = false;
-    });
-    $('[type="date"]').val('');
-    $('[type="radio"]').each(function() {
-        this.checked = false;
-    });
-    enableSubmit();
+    location.reload();
+    // event.preventDefault();
+    // $('p#results').hide();
+    // $('ul#result').hide();
+    // $('li').empty().hide();
+    // $('h4').empty().hide();
+    // $('[type="checkbox"]').each(function() {
+    //     this.checked = false;
+    // });
+    // $('[type="date"]').val('');
+    // $('[type="radio"]').each(function() {
+    //     this.checked = false;
+    // });
+    // enableSubmit();
 });
 
 function enableSubmit() {
@@ -48,7 +56,7 @@ function enableSubmit() {
 //code for after input and submit call
 $("#theForm").submit(function(event) {
     event.preventDefault();
-    $("#results").show();
+    $("p#results").show();
     jsonData();
     disableSubmit();
 });
@@ -75,33 +83,47 @@ function getJSON(url){
         });
     }
 
-//var li = $("<li>");
 function jsonData() { $.getJSON("http://localhost:2018").then(response => {
             if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
                 for(var i=0;i<6; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
                 }
             } else if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food Specials" + "</h4>");
                 for(var i=0;i<3; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
                 }
             } else if (response !== null && $("#activityChoice1").prop("checked") === true) {
                 $('p#results').append("<h4>" + "Food Specials" + "</h4>");
                 for(var i=0;i<3; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
                 }
             } else if (response !== null && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
                 $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
                 for(var i=3;i<6; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "</li>");
                 }
             } else {
                 $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
             }
         }).catch((err) => {
             console.log('error found = ', err);
+        });
+    }
+	mostPopularContent = "";
+	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
+            var businessData = response;
+				for (i in businessData) {
+				  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+				  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+				  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+				  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
+				}
+			document.getElementById("mostPopular").innerHTML = mostPopularContent;
+        }).catch((err) => {			
+				document.getElementById("mostPopular").innerHTML = "Data not available.";
+				console.log('error found = ', err);
         });
     }
 
@@ -113,6 +135,10 @@ $("#submitButton").click(function() {
 //https://stackoverflow.com/questions/15122526/disable-button-in-jquery
 function disableSubmit() {
     $("#submitButton").prop("disabled", true);
+};
+
+function enableSubmit() {
+    $("#submitButton").prop("disabled", false);
 };
 
 
