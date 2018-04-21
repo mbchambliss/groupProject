@@ -24,6 +24,8 @@ var http = require('http'),
       price: '1'
   };
 
+
+http.createServer(testApp).listen(2018);
 testApp.get("", function(req, res){
     client.search(searchRequest).then(response => {
         for (i=0;i<3;i++){
