@@ -1,7 +1,9 @@
 var http = require('http'),
     express = require('express'),
     testApp = express(),
-    searchResults = [];
+    searchResults = [],
+    searchResultsFood = [],
+    searchResultsBars = [];
 
   const yelp = require('yelp-fusion');
   const apiKey = "KAhRkGDUNpqGvR-P94ii7uH2K60Rt6GDk1msY6Yh_6DZNKxb0Q9aNNYoi-q0mos9zew6AZtMGIm6MrQFldYZ__TfeRqhJyHInCGuDGpuLIVIB5jQz6BW3gsH68nGWnYx";
@@ -27,36 +29,56 @@ var http = require('http'),
   testApp.get("", function(req, res){
       client.search(searchRequest).then(response => {
           for (i=0;i<3;i++){
-          res.json(response.jsonBody.businesses[i]);
+          searchResults.push(response.jsonBody.businesses[i]);
           }
-      }).then(function() {
-        client.search(searchRequest2).then(response => {
+      }).then(
+          client.search(searchRequest2).then(response => {
           for (i=0;i<3;i++){
-              searchResults.push(response.jsonBody.businesses[i]);
+          searchResults.push(response.jsonBody.businesses[i]);
           }
-        })
-    }).then(function(response) {
+      })).then(function(response) {
           searchResults.forEach(function(element){
           res.json(searchResults)
-          //console.log(searchResults);
-            })
-        }).catch(e => {
-            console.log(e);
+      })
+  }).catch(e => {
+        console.log(e);
       });
   });
 
-//original - works but not perfectly
-//testApp.get("", function(req, res){
+testApp.get("/restaurants", function(req, res){
+    client.search(searchRequest).then(response => {
+        for (i=0;i<3;i++){
+            searchResultsFood.push(response.jsonBody.businesses[i]);
+        }
+            res.json(searchResultsFood);
+    }).catch(e => {
+      console.log(e);
+    });
+});
+
+testApp.get("/bars", function(req, res){
+    client.search(searchRequest2).then(response => {
+        for (i=0;i<3;i++){
+            searchResultsBars.push(response.jsonBody.businesses[i]);
+        }
+        res.json(searchResultsBars);
+    }).catch(e => {
+      console.log(e);
+    });
+});
+
+//old code
+// testApp.get("", function(req, res){
 //     client.search(searchRequest).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
 //         }
-//     });
-//     client.search(searchRequest2).then(response => {
+//     }).then(
+//         client.search(searchRequest2).then(response => {
 //         for (i=0;i<3;i++){
 //         searchResults.push(response.jsonBody.businesses[i]);
 //         }
-//     }).then(function(response) {
+//     })).then(function(response) {
 //         searchResults.forEach(function(element){
 //         res.json(searchResults)
 //         //console.log(searchResults);
