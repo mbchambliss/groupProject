@@ -162,9 +162,7 @@ function jsonData() {
 // 		document.getElementById("mostPopular").innerHTML = "Data not available.";
 // 		console.log('error found = ', err);
 
-	mostPopularContent = document.getElementById("mostPopular").innerHTML;
-	pricesContent = document.getElementById("categories").innerHTML;
-	closestContent = document.getElementById("closest").innerHTML;
+	
 	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
 
             var lookup = {};
@@ -185,7 +183,13 @@ function jsonData() {
             Array.min = function( array ){
                 return Math.min.apply( Math, array );
             };
-
+            document.getElementById("mostPopular").innerHTML = "";
+            document.getElementById("categories").innerHTML = "";
+            document.getElementById("closest").innerHTML = "";
+            
+            mostPopularContent = document.getElementById("mostPopular").innerHTML;
+            pricesContent = document.getElementById("categories").innerHTML;
+            closestContent = document.getElementById("closest").innerHTML;
             var closestDistance = Array.min(distancesArray);
 				for (i in businessData) {
                     if(businessData[i].rating >= 4.5) {
