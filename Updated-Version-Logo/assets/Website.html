@@ -19,31 +19,31 @@
 <div id="Home" class="tabcontent">
   <form id="theForm">
     <fieldset>
-        <legend>Choose one or more activity</legend>
+        <legend>Choose One or More Activity</legend>
             <input type="checkbox" id="activityChoice1" name="food" value="food">
               <label for="activityChoice1">Food</label>
             <input type="checkbox" id="activityChoice2" name="drinks" value="drinks">
               <label for="activityChoice2">Drinks</label>
-            <input type="checkbox" id="activityChoice3" name="entertainment" value="entertainment">
-              <label for="activityChoice3">Entertainment</label>
+            <!-- <input type="checkbox" id="activityChoice3" name="entertainment" value="entertainment">
+              <label for="activityChoice3">Entertainment</label> -->
     </fieldset>
 
-    <fieldset>
+    <!-- <fieldset>
         <legend>Choose a date</legend>
             <input type="date" id="date" name="event" min="2018-01-01" max="2050-01-01" required>
-    </fieldset>
+    </fieldset> -->
 
-    <fieldset>
+    <!-- <fieldset>
         <legend>Are you a Loyola student?</legend>
             <input type="radio" id="studentChoice1" name="student" value="yes" required>
             <label for="studentChoice1">Yes</label>
 
             <input type="radio" id="studentChoice2" name="student" value="no" required>
             <label for="studentChoice2">No</label>
-    </fieldset>
+    </fieldset> -->
 
     <fieldset>
-        <legend>Are you over the age of 21?</legend>
+        <legend>Are You 21 or Older?</legend>
             <input type="radio" id="ageChoice1" name="age" value="yes" required>
             <label for="ageChoice1">Yes</label>
 
@@ -74,12 +74,8 @@
 <script>
 
 
-var myObj, i, x ="";
-myObj = {
-    "names": [ "Lighthouse Tavern", "Susie's Noon Hour Grill", "Flaco's Tacos" ],
-    "specials": [ "Crabs: $1 per oz", "All beer on tap: $2", "Special Taco for only $1" ],
-    "addresses": [ "7301 N Sheridan Rd, Chicago, IL 60626", "6930 N Glenwood Ave., Chicago, IL 60626", "46 E Chicago Ave., Chicago, IL 60611" ]
-  };
+var i, x ="";
+
 
 var jsonArray = [
   {
@@ -156,9 +152,9 @@ for (i in jsonArray) {
 
 </div>
 
-<footer>created by Grace, Blake and Keyti &#x2764;</footer>
 
 </main>
+<footer>created by Grace, Blake and Keyti &#x2764;</footer>
 <script src="jquery-331.js"></script>
 <script src="Script.js"></script>
 </body>

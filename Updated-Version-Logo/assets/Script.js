@@ -32,8 +32,9 @@ document.getElementById("defaultOpen").click();
 //Reset Button
 $("#resetButton").click(function() {
     event.preventDefault();
-    $('h4').empty();
+    $('#results').empty();
     $('ul').empty();
+    $('li').empty();
     $('[type="checkbox"]').each(function() {
         this.checked = false;
     });
@@ -52,7 +53,6 @@ function enableSubmit() {
 $("#theForm").submit(function(event) {
     event.preventDefault();
     $("#results").show();
-    //loadBusinesses();
     jsonData();
     disableSubmit();
 });
@@ -79,152 +79,102 @@ function getJSON(url){
         });
     }
 
-// function loadBusinesses() {
-//     let yelpArray = [];
-//     $.getJSON("http://localhost:2018/restaurants.json").then(response =>{
-//         for (i=0;i<3;i++){
-//             var objData = response.businesses[i].name;
-//             var parsedData = JSON.parse(objData);
-//             yelpArray.push(parsedData);
-//             //yelpArray.push(response.businesses[i].name);
-//         }
-//         return $.getJSON("http://localhost:2018/bars.json");
-//     }).then(response => {
-//         for (i=0;i<3;i++){
-//             yelpArray.push(response.businesses[i].name);
-//         }
-//     }).catch((err) => {
-//         console.log('error found = ', err);
-//     });
-//     console.log(yelpArray);
-//     //jsonData(yelpArray);
-// }
-
 function jsonData() {
     if ($("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
         $.getJSON("http://localhost:2018").then(response => {
-            $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
+            $('p#results').append("<h4>" + "Cheap Food & Bar Options" + "</h4>");
             for(var i=0;i<6; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "<img class='zoom' class='locationImg' src=\'" + response[i].image_url + "'/></li>");
             }
         })
 } else if ($("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
     $.getJSON("http://localhost:2018/restaurants").then(response => {
-        $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+        $('p#results').append("<h4>" + "Cheap Food Options" + "</h4>");
         for(var i=0;i<3; i++){
-            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "<img class='zoom' class='locationImg' src=\'" + response[i].image_url + "'/></li>");
         }
     })
 } else if ($("#activityChoice1").prop("checked") === true) {
     $.getJSON("http://localhost:2018/restaurants").then(response => {
-        $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+        $('p#results').append("<h4>" + "Cheap Food Options" + "</h4>");
         for(var i=0;i<3; i++){
-            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "<img class='zoom' class='locationImg' src=\'" + response[i].image_url + "'/></li>");
             }
         })
     } else if ($("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
         $.getJSON("http://localhost:2018/bars").then(response => {
-        $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
+        $('p#results').append("<h4>" + "Cheap Bar Options" + "</h4>");
             for(var i=0;i<3; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a><br>" + "<img class='zoom' class='locationImg' src=\'" + response[i].image_url + "'/></li>");
                 }
             })
         } else {
-            $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
+            $('p#results').append("<h4>" + "No results based on your selections." + "</h4>");
             }
 }
 
+function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
+    var lookup = {};
+    var items = response;
+    var result = [];
 
+    for (var item, i = 0; item = items[i++];) {
+        var id = item.id;
+        if (!(id in lookup)) {
+            lookup[id] = 1;
+            result.push(item);
+        }
+    }
 
+    var businessData = result;
+    var distancesArray = businessData.map(a => a.distance);
+    Array.min = function( array ){
+        return Math.min.apply( Math, array );
+    };
+    document.getElementById("mostPopular").innerHTML = "";
+    document.getElementById("categories").innerHTML = "";
+    document.getElementById("closest").innerHTML = "";
 
-
-
-
-
-
-
-
-
-
-
-
-// mostPopularContent = "";
-//     function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
-//         var businessData = response;
-// 		for (i in businessData) {
-// 		  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
-// 		  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
-// 		  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
-// 		  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
-// 			}
-// 		document.getElementById("mostPopular").innerHTML = mostPopularContent;
-//         }).catch((err) => {
-// 		document.getElementById("mostPopular").innerHTML = "Data not available.";
-// 		console.log('error found = ', err);
-
-	mostPopularContent = document.getElementById("mostPopular").innerHTML;
-	pricesContent = document.getElementById("categories").innerHTML;
-	closestContent = document.getElementById("closest").innerHTML;
-	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
-
-            var lookup = {};
-            var items = response;
-            var result = [];
-            
-            for (var item, i = 0; item = items[i++];) {
-              var id = item.id;
-            
-              if (!(id in lookup)) {
-                lookup[id] = 1;
-                result.push(item);
-              }
-            }
-
-            var businessData = result;
-            var distancesArray = businessData.map(a => a.distance);
-            Array.min = function( array ){
-                return Math.min.apply( Math, array );
-            };
-
-            var closestDistance = Array.min(distancesArray);
-				for (i in businessData) {
-                    if(businessData[i].rating >= 4.5) {
-                        mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
-                        mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
-                        mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
-                        mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
-                    }
-
-                    if(businessData[i].price.length == 1) {
-                        pricesContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
-                        pricesContent  +=   businessData[i].name + "<br>";
-                        pricesContent  +=  "<img class='zoom' src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
-                        "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
-                        "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
-                        pricesContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
-                    }
-                    
-                    if(businessData[i].distance == closestDistance){
-                        closestContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
-                        closestContent  +=   businessData[i].name + "<br>";
-                        closestContent  +=   "Phone: " + businessData[i].phone + "<br>";
-                        closestContent  +=  "<img src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
-                        "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
-                        "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
-                        closestContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
-                    }
-                    
-
-
+    mostPopularContent = document.getElementById("mostPopular").innerHTML;
+    pricesContent = document.getElementById("categories").innerHTML;
+    closestContent = document.getElementById("closest").innerHTML;
+    var closestDistance = Array.min(distancesArray);
+		for (i in businessData) {
+            if(businessData[i].rating >= 4.5) {
+                mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+                mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+                mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+                mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
                 }
-                document.getElementById("mostPopular").innerHTML = mostPopularContent;
-                document.getElementById("categories").innerHTML = pricesContent;
-                document.getElementById("closest").innerHTML = closestContent;
-            }).catch((err) => {			
-				document.getElementById("mostPopular").innerHTML = "Data not available.";
-				document.getElementById("categories").innerHTML = "Data not available.";
-				document.getElementById("closest").innerHTML = "Data not available.";
-				console.log('error found = ', err);
+
+                if(businessData[i].price.length == 1) {
+                    pricesContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
+                    pricesContent  +=   businessData[i].name + "<br>";
+                    pricesContent  +=  "<img class='zoom' src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
+                    "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
+                    "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
+                    pricesContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
+                }
+
+                if(businessData[i].distance == closestDistance){
+                    closestContent  +=  "<div class='restaurantTabsPrices'><div class='suggestionsTabsHeaders'></div><br><br>";
+                    closestContent  +=   businessData[i].name + "<br>";
+                    closestContent  +=   "Phone: " + businessData[i].phone + "<br>";
+                    closestContent  +=  "<img src='" + businessData[i].image_url + "' height='75' name='restaurantImage'"+
+                    "onmouseover=\"restaurantImage.width='300';restaurantImage.height='200';\""+
+                    "onmouseout=\"restaurantImage.width='150';restaurantImage.height='100';\" /> <br>";
+                    closestContent  +=  "Address: " + businessData[i].location.display_address + "<br></div>";
+                }
+
+        }
+        document.getElementById("mostPopular").innerHTML = mostPopularContent;
+        document.getElementById("categories").innerHTML = pricesContent;
+        document.getElementById("closest").innerHTML = closestContent;
+            }).catch((err) => {
+			document.getElementById("mostPopular").innerHTML = "Data not available.";
+			document.getElementById("categories").innerHTML = "Data not available.";
+			document.getElementById("closest").innerHTML = "Data not available.";
+			console.log('error found = ', err);
     });
     }
 
@@ -241,101 +191,3 @@ function disableSubmit() {
 function enableSubmit() {
     $("#submitButton").prop("disabled", false);
 };
-
-
-
-
-
-
-//old code
-// function jsonData() { $.getJSON("http://localhost:2018").then(response => {
-//         if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
-//             $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
-//             for(var i=0;i<6; i++){
-//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-//             }
-//         } else if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
-//             $('p#results').append("<h4>" + "Food Specials" + "</h4>");
-//             for(var i=0;i<3; i++){
-//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-//             }
-//         } else if (response !== null && $("#activityChoice1").prop("checked") === true) {
-//             $('p#results').append("<h4>" + "Food Specials" + "</h4>");
-//             for(var i=0;i<3; i++){
-//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-//             }
-//         } else if (response !== null && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
-//             $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
-//             for(var i=3;i<6; i++){
-//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-//             }
-//         } else {
-//             $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
-//         }
-//         }).catch((err) => {
-//             console.log('error found = ', err);
-//         });
-//     }
-
-
-// $("#theForm").submit(function(event) {
-//     event.preventDefault();
-//     $("p#results").show();
-//     $.getJSON("http://localhost:2018", function(data){
-//             for(var i=0;i<data.length; i++){
-//                 $('ul#result').append("<li>" + data[i].name + ": price level: " +data[i].price + "</li>");
-//         }
-//     });
-//     disableSubmit();
-//     $("li").addClass("newLi");
-// });
-
-// var xobj = new XMLHttpRequest();
-// xobj.open('GET', "http://localhost:2018");
-// xobj.onload = function(data) {
-// };
-// xobj.send();
-
-
-//-----NEEDS WORK!
-// $("#theForm").submit((function(event) {
-//     event.preventDefault();
-//     $("p#results").show();
-// })).then(function(){
-//         getJSON("http://localhost:2018").then(response => {
-//             if (response !== null) {
-//                 for(var i=0;i<6; i++){
-//                 $('ul#result').append("<li>" + response[i].name + ": price level: " +response[i].price + "</li>");
-//                 }
-//             }
-//         }).catch((err) => {
-//             console.log('error found = ', err);
-//         });
-//     }).done(function() {
-//             disableSubmit();
-//             $("li").addClass("newLi");
-//         });
-
-
-
-
-//original submit - works!
-// $( "#theForm" ).submit(function( event ) {
-//         event.preventDefault();
-//         $("p#results").show();
-//         checkFood();
-//         checkAge();
-//         checkEvent();
-//         disableSubmit();
-//         $("li").addClass("newLi");
-// });
-
-
-//original getJSON - works!
-// $.getJSON("http://localhost:2018", function(data){
-//     for(var i=0;i<data.length; i++){
-//         //below just for testing - Works!
-//         //push to an array then iterate through and add li to results
-//         console.log(data[i].name + ": price level: " +data[i].price);
-//     }
-//     });

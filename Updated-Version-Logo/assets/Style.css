@@ -3,7 +3,13 @@ ul {
 }
 
 li {
-    padding-top: 2%;
+    padding-top: 1%;
+    padding-bottom: 1.5%;
+    font-family: 'Arimo', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 95%;
 }
 
 * {box-sizing: border-box}
@@ -14,6 +20,10 @@ body, html {
     margin: 0;
 }
 
+a, a:visited {
+    text-decoration: none;
+    color: maroon;
+}
 
 .newLi {
     background-color: darkred;
@@ -120,6 +130,10 @@ h3 {
 h4 {
     font-family: 'Open Sans', sans-serif;
     color: black;
+    text-align: center;
+    padding-top: 6%;
+    width: 100%;
+    font-size: 30px;
 }
 
 input, p {
@@ -175,7 +189,6 @@ input[type='radio']:checked:after, input[type='checkbox']:checked:after {backgro
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     display:block;
-    float: right;
     padding: 5px 10px;
     margin: 15px auto auto 10px;
 }
