@@ -22,19 +22,15 @@ function openPage(pageName,elmnt) {
         tabcontent[i].style.display = "none";
     }
     document.getElementById(pageName).style.display = "block";
-	
+
 	if(pageName == 'Suggestions'){
         jsonDataSuggestions();
-		
-
     }
-
 }
 document.getElementById("defaultOpen").click();
 
 //Reset Button
 $("#resetButton").click(function() {
-    //location.reload();
     event.preventDefault();
     $('h4').empty();
     $('ul').empty();
@@ -56,6 +52,7 @@ function enableSubmit() {
 $("#theForm").submit(function(event) {
     event.preventDefault();
     $("#results").show();
+    //loadBusinesses();
     jsonData();
     disableSubmit();
 });
@@ -82,48 +79,87 @@ function getJSON(url){
         });
     }
 
-function jsonData() { $.getJSON("http://localhost:2018").then(response => {
-            if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
-                $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
-                for(var i=0;i<6; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-                }
-            } else if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
-                $('p#results').append("<h4>" + "Food Specials" + "</h4>");
-                for(var i=0;i<3; i++){
-                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-                }
-            } else if (response !== null && $("#activityChoice1").prop("checked") === true) {
-                $('p#results').append("<h4>" + "Food Specials" + "</h4>");
-                for(var i=0;i<3; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-                }
-            } else if (response !== null && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
-                $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
-                for(var i=3;i<6; i++){
-                    $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
-                }
-            } else {
-                $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
-            }
-        }).catch((err) => {
-            console.log('error found = ', err);
-        });
-    }
+// function loadBusinesses() {
+//     let yelpArray = [];
+//     $.getJSON("http://localhost:2018/restaurants.json").then(response =>{
+//         for (i=0;i<3;i++){
+//             var objData = response.businesses[i].name;
+//             var parsedData = JSON.parse(objData);
+//             yelpArray.push(parsedData);
+//             //yelpArray.push(response.businesses[i].name);
+//         }
+//         return $.getJSON("http://localhost:2018/bars.json");
+//     }).then(response => {
+//         for (i=0;i<3;i++){
+//             yelpArray.push(response.businesses[i].name);
+//         }
+//     }).catch((err) => {
+//         console.log('error found = ', err);
+//     });
+//     console.log(yelpArray);
+//     //jsonData(yelpArray);
+// }
 
-	mostPopularContent = "";
-	    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
-            var businessData = response;
-				for (i in businessData) {
-				  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
-				  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
-				  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
-				  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
-				}
-			document.getElementById("mostPopular").innerHTML = mostPopularContent;
-        }).catch((err) => {			
-				document.getElementById("mostPopular").innerHTML = "Data not available.";
-				console.log('error found = ', err);
+function jsonData() {
+    if ($("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
+        $.getJSON("http://localhost:2018").then(response => {
+            $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
+            for(var i=0;i<6; i++){
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+            }
+        })
+} else if ($("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
+    $.getJSON("http://localhost:2018/restaurants").then(response => {
+        $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+        for(var i=0;i<3; i++){
+            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+        }
+    })
+} else if ($("#activityChoice1").prop("checked") === true) {
+    $.getJSON("http://localhost:2018/restaurants").then(response => {
+        $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+        for(var i=0;i<3; i++){
+            $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+            }
+        })
+    } else if ($("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
+        $.getJSON("http://localhost:2018/bars").then(response => {
+        $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
+            for(var i=0;i<3; i++){
+                $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+                }
+            })
+        } else {
+            $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
+            }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mostPopularContent = "";
+    function jsonDataSuggestions() { $.getJSON("http://localhost:2018").then(response => {
+        var businessData = response;
+		for (i in businessData) {
+		  mostPopularContent  +=  "<div class='restaurantTabs'><div class='suggestionsTabsHeaders'>" + businessData[i].name + "</div><br>";
+		  mostPopularContent  +=  "Number of reviews: " + businessData[i].review_count + "<br>";
+		  mostPopularContent  +=  "Rating: " + businessData[i].rating + "<br>";
+		  mostPopularContent  +=  "Phone: " + businessData[i].phone + "<br></div>";
+			}
+		document.getElementById("mostPopular").innerHTML = mostPopularContent;
+        }).catch((err) => {
+		document.getElementById("mostPopular").innerHTML = "Data not available.";
+		console.log('error found = ', err);
         });
     }
 
@@ -145,6 +181,36 @@ function enableSubmit() {
 
 
 
+
+//old code
+// function jsonData() { $.getJSON("http://localhost:2018").then(response => {
+//         if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true) {
+//             $('p#results').append("<h4>" + "Food & Drink Specials" + "</h4>");
+//             for(var i=0;i<6; i++){
+//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+//             }
+//         } else if (response !== null && $("#activityChoice1").prop("checked") === true && $("#activityChoice2").prop("checked") === true && $("#ageChoice2").prop("checked") === true) {
+//             $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+//             for(var i=0;i<3; i++){
+//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+//             }
+//         } else if (response !== null && $("#activityChoice1").prop("checked") === true) {
+//             $('p#results').append("<h4>" + "Food Specials" + "</h4>");
+//             for(var i=0;i<3; i++){
+//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+//             }
+//         } else if (response !== null && $("#activityChoice2").prop("checked") === true && $("#ageChoice1").prop("checked") === true){
+//             $('p#results').append("<h4>" + "Drink Specials" + "</h4>");
+//             for(var i=3;i<6; i++){
+//                 $('ul#result').append("<li>" + response[i].name + "<br>" + "Price level: " +response[i].price + "<br>" + "<a href="+response[i].url+" target=\"_blank\">" + "Website" + "</a>" + "</li>");
+//             }
+//         } else {
+//             $('p#results').append("<h4>" + "No results found based on selections." + "</h4>");
+//         }
+//         }).catch((err) => {
+//             console.log('error found = ', err);
+//         });
+//     }
 
 
 // $("#theForm").submit(function(event) {
@@ -187,48 +253,6 @@ function enableSubmit() {
 
 
 
-//add details of what you want done here!!
-    // getJSON("http://localhost:2018").then(response => {
-    //     if (response !== null) {
-    //         for(var i=0;i<6; i++){
-    //         $('ul#result').append("<li>" + response[i].name + ": price level: " +response[i].price + "</li>");
-    //         }
-    //     }
-    // }).catch((err) => {
-    //     console.log('error found = ', err);
-    // });
-
-
-//Promise
-// const appPromise = new Promise((resolve, reject) => {
-//     resolve();
-// });
-// appPromise.then(data => {
-//     console.log("promise value = "+data);
-// }, err => {
-//     console.log("an error occurred.");
-// });
-
-// function checkAge() {
-//     var notOfAge = "You must be 21 years of age to drink. No drink specials available.";
-//     var ofAge = "Here are your specials: ";
-//     if ($('#ageChoice2').prop("checked") === true){
-//         $('ul#result').append("<li>" + notOfAge + "</li>");
-//     } else {
-//         $('ul#result').append("<li>" + ofAge + "</li>");
-//     }
-// };
-//
-// function checkFood(){
-//     var Foodrecommend1 = "Flaco's Tacos is what we recommend, here is the address: 1116-20 West Granville, check their website for details. ";
-//     var Foodrecommend2 = "Veranda Restaurant & Coffee, it gives 10% off to Loyola students with valid Student ID. ";
-//         if ($("#activityChoice1").prop("checked") === true && $("#studentChoice1").prop("checked") === true ) {
-//             $('ul#result').append("<li>" + Foodrecommend2 + "</li>" + "<li>" + Foodrecommend1 + "</li>");
-//         }
-//         else if ($("#activityChoice1").prop("checked") === true) {
-//             $('ul#result').append("<li>" + Foodrecommend1 + "</li>");
-//         }
-// };
 
 //original submit - works!
 // $( "#theForm" ).submit(function( event ) {
@@ -250,30 +274,3 @@ function enableSubmit() {
 //         console.log(data[i].name + ": price level: " +data[i].price);
 //     }
 //     });
-
-
-// function checkAge() {
-//     var notOfAge = "You must be 21 years of age to drink. No drink specials available.";
-//     var ofAge = "Here are your specials: ";
-//     if ($('#ageChoice2').prop("checked") === true){
-//         $('p#results').append(notOfAge);
-//     } else {
-//         $('p#results').append(ofAge);
-//     }
-// };
-
-// var list = $('p#results');
-// var newListItem = document.createElement('li');
-
-// var Eventrecommend1 = "Men's Volleyball vs Ball State. ";
-// var Eventrecommend2 = "Loyola Fine Arts Exibition. ";
-// var CommunityEvent = "Mosaic Art Classes Available. ";
-//
-// function checkEvent() {
-//     var eventChoice = $('#activityChoice3').prop("checked");
-//     // var dateChoice = document.getElementById('date').checked;
-//     if (eventChoice === true)
-//     {
-//         $('#results').append(Eventrecommend1, Eventrecommend2, CommunityEvent);
-//     }
-// };
