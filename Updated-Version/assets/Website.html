@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans:600i" rel="stylesheet">
+    <title>Cheap Date Application</title>
+</head>
+
+<body>
+  <header>
+    <img src="Logo.png" alt="Cheap Date Logo">
+    <h3>Cheap Date</h3>
+  </header>
+<main>
+<button class="tablink" onclick="openPage('Home', this)"id="defaultOpen">Home</button>
+<button class="tablink" onclick="openPage('Suggestions', this)">Suggestions</button>
+
+<div id="Home" class="tabcontent">
+  <form id="theForm">
+    <fieldset>
+        <legend>Choose One or More Activity</legend>
+            <input type="checkbox" id="activityChoice1" name="food" value="food">
+              <label for="activityChoice1">Food</label>
+            <input type="checkbox" id="activityChoice2" name="drinks" value="drinks">
+              <label for="activityChoice2">Drinks</label>
+            <!-- <input type="checkbox" id="activityChoice3" name="entertainment" value="entertainment">
+              <label for="activityChoice3">Entertainment</label> -->
+    </fieldset>
+
+    <!-- <fieldset>
+        <legend>Choose a date</legend>
+            <input type="date" id="date" name="event" min="2018-01-01" max="2050-01-01" required>
+    </fieldset> -->
+
+    <!-- <fieldset>
+        <legend>Are you a Loyola student?</legend>
+            <input type="radio" id="studentChoice1" name="student" value="yes" required>
+            <label for="studentChoice1">Yes</label>
+
+            <input type="radio" id="studentChoice2" name="student" value="no" required>
+            <label for="studentChoice2">No</label>
+    </fieldset> -->
+
+    <fieldset>
+        <legend>Are You 21 or Older?</legend>
+            <input type="radio" id="ageChoice1" name="age" value="yes" required>
+            <label for="ageChoice1">Yes</label>
+
+            <input type="radio" id="ageChoice2" name="age" value="no" required>
+            <label for="ageChoice2" id="ageChoice2">No</label>
+    </fieldset>
+
+<button id="submitButton">Submit &rarr;</button>
+<button id="resetButton">Reset</button>
+<!-- removed type=submit and type=reset from buttons above -->
+
+<p id="results">
+    <ul id="result"></ul>
+</p>
+
+
+</div>
+
+<div id="Suggestions" class="tabcontent">
+
+<!--add "Today's Deal" that pulls from JSON data-->
+
+<button class="accordion">This Week</button>
+<div class="panel">
+    <!--add entire weekly deals that pulls from JSON data-->
+<p>Here are some weekly deals our staff recommends:</p>
+<table>
+  <tr>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+
+  <tr>
+    <td>Rogers Park Social</td>
+    <td>R Public House</td>
+    <td>Pub 626</td>
+    <td>J.B. Albertos's</td>
+    <td>Bulldog Ale House</td>
+    <td>Bangers and Lace</td>
+    <td>Lighthouse Tavern</td>
+  </tr>
+
+    <tr>
+    <td>$6 Glasses of Wine</td>
+    <td>$5 Burger Monday</td>
+    <td>$10 Mussels and $5 Mules</td>
+    <td>1/2 Chicken Dinner for $8.50</td>
+    <td>All You Can Eat Fish Fry $10.99</td>
+    <td>$3 Hot Dog and Chips</td>
+    <td>Crabs: $1 per oz</td>
+  </tr>
+
+  <tr>
+    <td>6920 N Glenwood Ave, Chicago, IL 60626</td>
+    <td>1508 W Jarvis Ave, Chicago, IL 60626</td>
+    <td>1406 W Morse Ave, Chicago, IL 60626</td>
+    <td>1326 West Morse Avenue, Chicago, IL 60626</td>
+    <td>6606 N Sheridan Rd, Chicago, IL 60626</td>
+    <td>810 Grove St, Evanston, IL 60201</td>
+    <td>7301 N Sheridan Rd, Chicago, IL 60626</td>
+  </tr>
+</table>
+
+</div>
+
+<button class="accordion">Most Popular</button>
+<div class="panel">
+<p> Here are the most popular restaurants in your area:</p>
+<p id="mostPopular" ></p>
+
+</div>
+
+<button class="accordion">Cheap Dates</button>
+<div class="panel">
+<p>Here are the most affordable restaurants in your area:</p>
+<p id="categories" ></p>
+
+</div>
+
+<button class="accordion">Closest Restaurants</button>
+<div class="panel">
+<p> Here is the closest restaurant to you:</p>
+<p id="closest" ></p>
+<div id="map"></div>
+</div>
+
+</div>
+
+
+</main>
+<footer>created by Grace, Blake and Keyti &#x2764;</footer>
+<script src="jquery-331.js"></script>
+<script src="Script.js"></script>
+</body>
+</html>
