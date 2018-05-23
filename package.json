@@ -1,0 +1,19 @@
+{
+  "name": "updated-version-logo",
+  "version": "1.0.0",
+  "description": "Comp 424 application",
+  "main": "module-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cheap",
+    "date"
+  ],
+  "author": "Blake Keyti Grace",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "yelp-fusion": "^2.0.3"
+  }
+}
